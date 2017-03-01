@@ -9,7 +9,8 @@ require.config({
     map:{
     	'*':{    	
     		normalCar: 'CarCheapEngineCheapGears', // can get alias from factory
-    		logger: 'ConsoleLogger'
+    		logger: 'ConsoleLogger',
+
     	}, 	
     },
     shim:{    	
@@ -17,7 +18,7 @@ require.config({
     config:{
     	factory:{
     		isDebug: false,
-    		beans:{
+    		beans:{ // 	Conclusion: beans are good only for proto, buy default all is singleton
 	    		rcc_questions_slider:{
 	    			class:'rcc_slider', //full path or alias from paths
 		    		scope:'singleton', // singleton / prototype	    		
