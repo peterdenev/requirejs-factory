@@ -4,7 +4,7 @@ define([],function(){
 		config = typeof config !== 'undefined' ? config : requirejs.s.contexts._.config.config.factory;
 
 		var _beans = config.hasOwnProperty('beans') ? config.beans : {};
-		var _refKeyWord = config.hasOwnProperty('refKayWold') ? config.refKayWold : 'factory!';
+		var _refKeyWord = config.hasOwnProperty('refPrefix') ? config.refPrefix : 'factory!';
 		var _isDebug = config.hasOwnProperty('isDebug') ? config.isDebug : false;
 		var _defaultScope = config.hasOwnProperty('defaultScope') ? config.defaultScope : 'singleton';
 

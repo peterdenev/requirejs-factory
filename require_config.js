@@ -1,9 +1,7 @@
 // contents of main.js:
 require.config({
-    paths: {
-        rcc_slider: 'modules/rcc_slider', //base class
-        http: 'modules/http', //base class
-        factory: 'modules/requirejs-factory',  
+    paths: { 
+        factory: 'requirejs-factory',  
         ConsoleLogger: 'modules/ConsoleLogger',
     },
     map:{
@@ -17,52 +15,35 @@ require.config({
     },
     config:{
     	factory:{
-    		isDebug: false,
+    		isDebug: false, // set to true to see the procecss
+			refPrefix: 'factory!', 
     		beans:{ // 	Conclusion: beans are good only for proto, buy default all is singleton
-	    		rcc_questions_slider:{
-	    			class:'rcc_slider', //full path or alias from paths
-		    		scope:'singleton', // singleton / prototype	    		
-		    		args:[{
-		    			myVar: 'config_q',
-		    		}],
-		    		//properties:
-		    		//setters:
-		    	},
-		    	rcc_pages_slider:{
-		    		class:'rcc_slider',
-		    		scope:'singleton', // singleton / prototype	    		
-		    		args:[{
-		    			myVar: 'config_p',
-		    		}],
-		    		//properties:
-		    		//setters:
-		    	},
-		    	http:{
-		    		class:'http',
-		    		scope:'singleton', // singleton / prototype	    		
-		    		args:[],
-		    		//properties:
-		    		//setters:
+		    	EnvConf:{
+		    		class:'modules/AppEnv',
+		    		scope:'singleton', // singleton / prototype	(change to see the effect)    		
+		    		args:[
+						'factory!logger',
+					],
 		    	},
 
 		    	// BEANS //
 
 		    	CheapGears:{ // todo get the names directly from path // todo: get args auto
-		    		class: 'modules/CheapGears',
+		    		class: 'modules/Gears',
 		    		scope:'prototype',
 		    		args:[
 		    			'20'
 		    		]
 		    	},
 		    	ExpensiveGears:{
-		    		class: 'modules/ExpensiveGears',
+		    		class: 'modules/Gears',
 		    		scope:'prototype',
 		    		args:[
 		    			'40'
 		    		]
 		    	},
 		    	CheapEngineCheapGears:{
-		    		class: 'modules/CheapEngine',
+		    		class: 'modules/Engine',
 		    		args:[
 		    			'factory!CheapGears',
 		    			'200', //hp
@@ -70,7 +51,7 @@ require.config({
 		    		scope:'prototype',
 		    	},
 		    	CheapEngineExpensiveGears:{
-		    		class: 'modules/CheapEngine',
+		    		class: 'modules/Engine',
 		    		args:[
 		    			'factory!ExpensiveGears',
 		    			'200',
@@ -78,8 +59,7 @@ require.config({
 		    		scope:'prototype',
 		    	},
 		    	TurboEngineExpensiveGears:{
-		    		//class: 'modules/TurboEngine', // the same as Cheap, all diff to meke it expensive are as params
-		    		class: 'modules/CheapEngine',
+		    		class: 'modules/Engine',
 		    		args:[
 		    			'factory!ExpensiveGears',
 		    			'1200',
@@ -91,6 +71,7 @@ require.config({
 		    		args:[
 		    			'factory!CheapEngineCheapGears',
 		    			'factory!logger',
+		    			'factory!EnvConf',
 		    		],
 		    		scope:'prototype',
 		    	},
@@ -99,6 +80,7 @@ require.config({
 		    		args:[
 		    			'factory!CheapEngineExpensiveGears',
 		    			'factory!logger',
+						'factory!EnvConf',
 		    		],
 		    		scope:'prototype',
 		    	},
@@ -106,7 +88,8 @@ require.config({
 		    		class:'modules/Car',
 		    		args:[
 		    			'factory!TurboEngineExpensiveGears',
-		    			'factory!logger'
+		    			'factory!logger',
+						'factory!EnvConf',
 		    		],
 		    		scope:'prototype',
 		    	},
@@ -123,6 +106,6 @@ require.config({
 
 require(['factory'],function(Factory){
 	var factory = new Factory(); // or just Factory();
-	window.factory = factory;
-	require(['main3']);	
+	// window.factory = factory;
+	require(['main']);	
 })

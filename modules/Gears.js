@@ -1,5 +1,5 @@
 define([],function(){
-	function CheapGears(price){		
+	function Gears(price){		
 		function getPrice(){
 			return price;
 		}
@@ -13,5 +13,5 @@ define([],function(){
 		}
 	}
 
-	return CheapGears;
+	return Gears;
 })

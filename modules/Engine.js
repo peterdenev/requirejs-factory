@@ -1,5 +1,5 @@
 define([],function(){
-	function CheapEngine(gears, hp){		
+	function Engine(gears, hp){		
 		function getHp(){
 			return hp;
 		}
@@ -13,5 +13,5 @@ define([],function(){
 			gears:gears
 		}
 	}
-	return CheapEngine;
+	return Engine;
 })
